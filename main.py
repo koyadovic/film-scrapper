@@ -60,4 +60,21 @@ for film_name in top_films_spain_list:
             "url": url_mejortorrent + href
         })
 
-print("Results:\n{}".format(results))
+template = """<html>
+<head><title>Film Scrapper Result Page</title></head>
+<body>
+<h1>Links:</h1>
+{}
+</body>
+</html>
+"""
+
+html_code = ""
+for film_name, list_of_links in results.items():
+    html_code += "<h3>{}</h3>\n".format(film_name)
+    html_code += "<ul>\n"
+    for element in list_of_links:
+        html_code += "<li><a href=\"{}\">{}</a></li>\n".format(element["url"], element["name"])
+    html_code += "</ul>\n"
+
+print(template.format(html_code))
